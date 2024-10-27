@@ -26,7 +26,7 @@ chroot /rootfs /bin/bash /config/provision.sh
 ########################
 # boot.img
 
-cat /output/working/Image.gz /output/working/msm8916-handsome-openstick-uz801.dtb > /output/working/kernel-dtb
+cat /output/working/Image.gz /output/working/msm8916-handsome-openstick-sp970.dtb > /output/working/kernel-dtb
 
 mkbootimg \
     --base 0x80000000\
