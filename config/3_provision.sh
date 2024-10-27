@@ -21,7 +21,8 @@ mkdir -p /rootfs/output
 mount --bind /config /rootfs/config
 mount --bind /output /rootfs/output
 
-chroot /rootfs /bin/bash /config/provision.sh
+chroot /rootfs 
+/bin/bash /config/provision.sh
 
 ########################
 # boot.img
