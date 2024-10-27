@@ -1,4 +1,4 @@
-name: Build
+name: Build OpenStick kernal
 
 on:
   workflow_dispatch:
@@ -17,15 +17,15 @@ jobs:
         with:
           submodules: true
 
-      - name: Install dependencies
-        run: sudo sh -e docker build --tag openstick .
-        
       # Enable tmate debugging of manually-triggered workflows if the input option was provided
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
+      - name: Install dependencies
+        run: docker build --tag openstick .
         
-      - name: Extract MSM8916 firmware
-        run: sudo sh -e docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel.sh
+      - name: build boot.img
+        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel.sh
         
         
