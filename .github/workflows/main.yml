@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+          debug_enabled:
+            type: boolean
+            description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+            required: false
+            default: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install dependencies
+        run: sudo sh -e docker build --tag openstick .
+        
+      # Enable tmate debugging of manually-triggered workflows if the input option was provided
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+        
+      - name: Extract MSM8916 firmware
+        run: sudo sh -e docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel.sh
+        
+        
