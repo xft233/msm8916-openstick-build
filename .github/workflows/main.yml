@@ -21,6 +21,8 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+        with:
+          detached: true
 
       - name: Install dependencies
         run: docker build --tag openstick .
@@ -28,4 +30,8 @@ jobs:
       - name: build boot.img
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel.sh
         
-        
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: openstick-debian
+          path: output/*
