@@ -1,5 +1,8 @@
 #! /bin/bash
 
+apt-get install -y binfmt-support qemu-user-static
+apt-get install -y debootstrap build-essential 
+
 mkdir -p output/working rootfs
 # prep rootfs image
 truncate -s 1024M output/working/rootfs_base.ext4
