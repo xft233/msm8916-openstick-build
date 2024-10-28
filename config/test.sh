@@ -1,6 +1,6 @@
 #! /bin/bash
 
-apt-get -y update && apt-get -y upgrade
+apt-get -y update
 apt-get install -y binfmt-support qemu-user-static
 apt-get install -y debootstrap
 
