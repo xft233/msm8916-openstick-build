@@ -1,7 +1,8 @@
 #! /bin/bash
 
+apt-get -y update && apt-get -y upgrade
 apt-get install -y binfmt-support qemu-user-static
-apt-get install -y debootstrap build-essential 
+apt-get install -y debootstrap
 
 mkdir -p output/working rootfs
 # prep rootfs image
