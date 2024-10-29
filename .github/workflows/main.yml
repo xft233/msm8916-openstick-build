@@ -17,13 +17,6 @@ jobs:
         with:
           submodules: true
 
-      # Enable tmate debugging of manually-triggered workflows if the input option was provided
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
-        with:
-          detached: true
-
       - name: Install dependencies
         run: docker build --tag openstick .
         
@@ -33,6 +26,13 @@ jobs:
       - name: build rootfs
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/2_rootfs.sh 
 
+      # Enable tmate debugging of manually-triggered workflows if the input option was provided
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+      #  with:
+      #    detached: true
+          
       - name: provision img
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/3_provision.sh
 
