@@ -12,4 +12,5 @@ export CROSS_COMPILE=aarch64-linux-gnu-
 export ARCH=arm64
 make clean
 make msm8916_defconfig
+cp .config /output/working/
 # make menuconfig
