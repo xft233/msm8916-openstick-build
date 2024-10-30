@@ -4,6 +4,7 @@ set -ex
 cd /linux
 export CROSS_COMPILE=aarch64-linux-gnu-
 export ARCH=arm64
+cp /output/working/.config .
 make -j16
 
 # package kernel => .deb
