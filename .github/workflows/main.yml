@@ -18,10 +18,12 @@ jobs:
           submodules: true
       
       - name: Install dependencies
-        run: sudo sh -e config/0_installdeps.sh
+        run:
+          sudo sh -e config/0_installdeps.sh
+          docker build --tag openstick .
         
       - name: build kernel
-        run: sudo sh -e config/1_kernel.sh
+        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel.sh
 
       # Enable tmate debugging of manually-triggered workflows if the input option was provided
       - name: Setup tmate session
@@ -31,13 +33,16 @@ jobs:
           detached: true
 
       - name: build kernel1
-        run: sudo sh -e config/1_kernel_1.sh
+        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel_1.sh
         
       - name: build rootfs
         run: sudo sh -e config/2_rootfs.sh 
          
+      - name: provision_0 img
+        run: sudo sh -e config/3_provision_0.sh    
+        
       - name: provision img
-        run: sudo sh -e config/3_provision.sh
+        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/3_provision.sh
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
