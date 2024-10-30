@@ -1,4 +1,4 @@
-sudo apt-get -y update && apt-get -y upgrade
+sudo apt-get -y update 
 
 # set timezone otherwise we end up stuck in a menu
 #RUN ln -snf /usr/share/zoneinfo/$CONTAINER_TIMEZONE /etc/localtime && echo $CONTAINER_TIMEZONE > /etc/timezone
