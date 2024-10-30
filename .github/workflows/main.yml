@@ -16,25 +16,28 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-
+      
       - name: Install dependencies
-        run: docker build --tag openstick .
+        run: sudo sh -e config/0_installdeps.sh
         
-      - name: build boot.img
-        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel.sh
-
-      - name: build rootfs
-        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/2_rootfs.sh 
+      - name: build kernel
+        run: sudo sh -e config/1_kernel.sh
 
       # Enable tmate debugging of manually-triggered workflows if the input option was provided
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
-      #  with:
-      #    detached: true
-          
+        with:
+          detached: true
+
+      - name: build kernel1
+        run: sudo sh -e config/1_kernel_1.sh
+        
+      - name: build rootfs
+        run: sudo sh -e config/2_rootfs.sh 
+         
       - name: provision img
-        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/3_provision.sh
+        run: sudo sh -e config/3_provision.sh
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
