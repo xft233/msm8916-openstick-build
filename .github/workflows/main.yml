@@ -20,8 +20,11 @@ jobs:
       - name: Install dependencies
         run:
           sudo sh -e config/0_installdeps.sh
+
+      - name: Install dependencies 1
+        run:
           docker build --tag openstick .
-        
+          
       - name: build kernel
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel.sh
 
