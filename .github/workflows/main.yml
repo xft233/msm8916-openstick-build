@@ -42,7 +42,7 @@ jobs:
         run: sudo bash -e config/2_rootfs.sh 
          
       - name: provision_0 img
-        run: sudo sh -e config/3_provision_0.sh    
+        run: sudo sh -e config/3_privision_0.sh    
         
       - name: provision img
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/3_provision.sh
