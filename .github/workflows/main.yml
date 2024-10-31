@@ -39,7 +39,7 @@ jobs:
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output openstick /bin/bash /config/1_kernel_1.sh
         
       - name: build rootfs
-        run: sudo sh -e config/2_rootfs.sh 
+        run: sudo bash -e config/2_rootfs.sh 
          
       - name: provision_0 img
         run: sudo sh -e config/3_provision_0.sh    
