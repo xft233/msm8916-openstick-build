@@ -2,7 +2,6 @@
 set -ex
 
 umount /rootfs || true
-cp /output/working/rootfs_base.ext4 /output/rootfs.ext4
 mount /output/rootfs.ext4 /rootfs
 
 ########################
