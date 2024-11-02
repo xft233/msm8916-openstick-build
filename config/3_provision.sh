@@ -32,12 +32,12 @@ sleep 5
 
 ## below seems to fail but image still works?
 
-# losetup -d /dev/loop99 || true
-# mknod -m 660 /dev/loop99 b 7 11 || true
-# losetup -P /dev/loop99 /output/rootfs.ext4
-# fsck -pf /dev/loop99
-# echo y|sudo tune2fs -f -U a7ab80e8-e9d1-e8cd-f157-93f69b1d141e /dev/loop99
-# losetup -d /dev/loop99
+ losetup -d /dev/loop99 || true
+ mknod -m 660 /dev/loop99 b 7 11 || true
+ losetup -P /dev/loop99 /output/rootfs.ext4
+ fsck -pf /dev/loop99
+ echo y|sudo tune2fs -f -U a7ab80e8-e9d1-e8cd-f157-93f69b1d141e /dev/loop99
+ losetup -d /dev/loop99
 
 img2simg /output/rootfs.ext4 /output/rootfs.img
 
