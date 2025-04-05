@@ -16,8 +16,8 @@ sleep 5
 mount ./output/working/rootfs_base.btrfs ./rootfs
 
 # debootstrap bullseye
-export DEBIAN_VERSION=bullseye
-debootstrap --foreign --arch=arm64 --include openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION ./rootfs http://deb.debian.org/debian/
+export DEBIAN_VERSION=trixie
+debootstrap --foreign --arch=arm64 --include btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION ./rootfs http://deb.debian.org/debian/
 cp $(which qemu-aarch64-static) ./rootfs/usr/bin
 chroot ./rootfs /debootstrap/debootstrap --second-stage
 rm ./rootfs/usr/bin/qemu-aarch64-static
