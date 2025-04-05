@@ -10,10 +10,10 @@ popd
 
 # prep rootfs image
 mkdir ./rootfs
-truncate -s 1024M ./output/working/rootfs_base.ext4
-mkfs.ext4 ./output/working/rootfs_base.ext4
+truncate -s 1024M ./output/working/rootfs_base.btrfs
+mkfs.btrfs ./output/working/rootfs_base.btrfs
 sleep 5
-mount ./output/working/rootfs_base.ext4 ./rootfs
+mount ./output/working/rootfs_base.btrfs ./rootfs
 
 # debootstrap bullseye
 export DEBIAN_VERSION=bullseye
