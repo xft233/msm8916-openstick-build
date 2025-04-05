@@ -18,7 +18,7 @@ RUN apt-get install -y build-essential git flex gcc-aarch64-linux-gnu binutils-a
 ########################
 ## KERNEL
 
-RUN git clone https://github.com/OpenStick/linux --depth=1 && cd ./linux && git checkout f17addf14f0ab2ef17e314249e0cfeb3fd7bcc9a
+RUN git clone https://github.com/msm8916-mainline/linux --depth=1 && cd ./linux
 
 ########################
 
