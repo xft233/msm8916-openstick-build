@@ -4,7 +4,7 @@ set -ex
 echo "debian-$DEBIAN_VERSION" > /etc/hostname
 passwd -d root
 
-apt -y install mobile-tweaks-common network-manager
+apt -y install mobile-tweaks-common network-manager locales sudo systemd-timesyncd curl vim
 
 ########################
 # KERNEL
