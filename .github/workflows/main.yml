@@ -17,21 +17,18 @@ jobs:
         with:
           submodules: true
 
-      - name: Install dependencies
-        run: |
-          sudo sh -e config/0_installdeps.sh
-          docker build --tag linux .
-          
-      - name: build kernel
-        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/1_kernel.sh
-
-      # Enable tmate debugging of manually-triggered workflows if the input option was provided
+# Enable tmate debugging of manually-triggered workflows if the input option was provided
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         with:
           detached: true
 
+      - name: Install dependencies
+        run: |
+          sudo sh -e config/0_installdeps.sh
+          docker build --tag linux .
+      
       - name: build kernel
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/1_kernel.sh
         
