@@ -1,6 +1,7 @@
 FROM debian:bookworm
 
 ENV DEBIAN_FRONTEND noninteractive
+Run dpkg --add-architecture arm64
 RUN apt-get -y update
 
 ########################
@@ -13,7 +14,7 @@ RUN apt-get install -y binfmt-support qemu-user-static gcc-aarch64-linux-gnu fak
 # deps as provided at https://github.com/bkleiner/debian-firecracker
 RUN apt-get install -y debootstrap build-essential fakeroot bc kmod cpio flex cpio libncurses5-dev libelf-dev libssl-dev
 # deps missing from above
-RUN apt-get install -y debhelper-compat btrfs-progs git flex gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu libssl-dev rsync
+RUN apt-get install -y libssl-dev:arm64 debhelper-compat btrfs-progs git flex gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu rsync
 
 ########################
 ## KERNEL
