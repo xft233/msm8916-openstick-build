@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM debian:release
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -y update
