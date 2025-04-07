@@ -20,9 +20,7 @@ mkdir -p ./rootfs/output
 mount --bind ./config ./rootfs/config
 mount --bind ./output ./rootfs/output
 
-cp $(which qemu-aarch64-static) ./rootfs/usr/bin
 chroot ./rootfs /bin/bash /config/chroot-system-setup.sh
-rm ./rootfs/usr/bin/qemu-aarch64-static
 
 sync
 sleep 5
