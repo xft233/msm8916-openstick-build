@@ -15,6 +15,6 @@ sleep 5
 mount -o compress=zstd ./output/working/rootfs_base.btrfs ./rootfs
 
 # debootstrap bullseye
-export DEBIAN_VERSION=trixie
+export DEBIAN_VERSION=testing
 debootstrap --arch=arm64 --include btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION ./rootfs http://deb.debian.org/debian/
 umount ./rootfs
