@@ -1,8 +1,8 @@
 #! /bin/bash
 set -ex
 
-cp ./output/working/rootfs_base.ext4 ./output/rootfs.ext4
-mount ./output/rootfs.ext4 ./rootfs
+cp ./output/working/rootfs_base.btrfs ./output/rootfs.btrfs
+mount ./output/rootfs.btrfs ./rootfs
 
 
 ########################
