@@ -21,7 +21,7 @@ mount --bind ./config ./rootfs/config
 mount --bind ./output ./rootfs/output
 
 cp $(which qemu-aarch64-static) ./rootfs/usr/bin
-chroot ./rootfs /bin/bash /config/provision.sh
+chroot ./rootfs /bin/bash /config/chroot-system-setup.sh
 rm ./rootfs/usr/bin/qemu-aarch64-static
 
 sync
@@ -36,7 +36,7 @@ sleep 5
 ########################
 # boot.img
 
-cat /output/working/Image.gz /output/working/msm8916-handsome-openstick-sp970.dtb > /output/working/kernel-dtb
+cat /output/working/Image.gz /output/working/msm8916-thwc-ufi001c.dtb > /output/working/kernel-dtb
 
 mkbootimg \
     --base 0x80000000\
@@ -45,8 +45,8 @@ mkbootimg \
     --tags_offset 0x01e00000\
     --pagesize 2048\
     --second_offset 0x00f00000\
-    --ramdisk /rootfs/boot/initrd.img-5.15.0-handsomekernel+\
-    --cmdline "earlycon root=PARTUUID=a7ab80e8-e9d1-e8cd-f157-93f69b1d141e console=ttyMSM0,115200 no_framebuffer=true rw"\
+    --ramdisk /rootfs/boot/initrd.img*\
+    --cmdline "earlycon root=PARTUUID=a7ab80e8-e9d1-e8cd-f157-93f69b1d141e rootflags=compress=zstd,defaults,lazytime console=ttyMSM0,115200 no_framebuffer=true rw"\
     --kernel /output/working/kernel-dtb\
     -o /output/boot.img
 
