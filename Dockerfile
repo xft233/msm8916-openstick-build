@@ -13,7 +13,7 @@ RUN apt-get install -y binfmt-support qemu-user-static gcc-10-aarch64-linux-gnu 
 # deps as provided at https://github.com/bkleiner/debian-firecracker
 RUN apt-get install -y debootstrap build-essential fakeroot bc kmod cpio flex cpio libncurses5-dev libelf-dev libssl-dev
 # deps missing from above
-RUN apt-get install -y build-essential git flex gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu libssl-dev rsync
+RUN apt-get install -y btrfs-progs build-essential git flex gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu libssl-dev rsync
 
 ########################
 ## KERNEL
