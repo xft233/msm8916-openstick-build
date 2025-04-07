@@ -16,6 +16,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
+
+      - name: Install dependencies 1
+        run:
+          docker build --tag linux .
           
       - name: build kernel
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/1_kernel.sh
