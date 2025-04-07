@@ -18,6 +18,17 @@ mount -o compress=zstd ./output/working/rootfs_base.btrfs ./rootfs
 export DEBIAN_VERSION=testing
 debootstrap --foreign --arch=arm64 --include btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION ./rootfs http://deb.debian.org/debian/
 cp $(which qemu-aarch64-static) ./rootfs/usr/bin
+
+mount --bind /proc ./rootfs/proc 
+mount --bind /dev ./rootfs/dev # causes device busy
+mount --bind /dev/pts ./rootfs/dev/pts
+mount --bind /sys ./rootfs/sys
+
 chroot ./rootfs /debootstrap/debootstrap --second-stage
 rm ./rootfs/usr/bin/qemu-aarch64-static
+
+umount ./rootfs/dev/pts
+umount ./rootfs/dev
+umount ./rootfs/sys
+umount ./rootfs/proc
 umount ./rootfs
