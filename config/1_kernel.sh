@@ -16,7 +16,7 @@ make msm8916_defconfig
 make -j$(nproc)
 
 # package kernel => .deb
-fakeroot make-kpkg --initrd --cross-compile aarch64-linux-gnu- --arch arm64 kernel_image kernel_headers modules_image
+fakeroot make deb-pkg
 
 # copy to working
 cp /linux/arch/arm64/boot/Image.gz /output/working
