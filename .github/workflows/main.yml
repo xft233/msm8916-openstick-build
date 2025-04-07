@@ -17,8 +17,9 @@ jobs:
         with:
           submodules: true
 
-      - name: Install dependencies 1
-        run:
+      - name: Install dependencies
+        run: |
+          sudo sh -e config/0_installdeps.sh
           docker build --tag linux .
           
       - name: build kernel
