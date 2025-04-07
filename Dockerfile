@@ -1,4 +1,4 @@
-FROM debian:release
+FROM debian:bookworm
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -y update
