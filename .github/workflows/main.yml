@@ -25,9 +25,7 @@ jobs:
           detached: true
 
       - name: Install dependencies
-        run: |
-          sudo sh -e config/0_installdeps.sh
-          docker build --tag linux .
+        run: docker build --tag linux .
       
       - name: build kernel
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/1_kernel.sh
