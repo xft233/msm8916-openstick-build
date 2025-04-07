@@ -23,7 +23,7 @@ mount --bind /dev ./rootfs/dev # causes device busy
 mount --bind /dev/pts ./rootfs/dev/pts
 mount --bind /sys ./rootfs/sys
 cp $(which qemu-aarch64-static) ./rootfs/usr/bin
-chroot ./rootfs ./rootfs/usr/bin/qemu-aarch64-static /bin/sh /debootstrap/debootstrap --second-stage
+chroot ./rootfs /usr/bin/qemu-aarch64-static /bin/sh /debootstrap/debootstrap --second-stage
 rm ./rootfs/usr/bin/qemu-aarch64-static
 
 umount ./rootfs/dev/pts
