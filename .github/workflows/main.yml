@@ -33,7 +33,7 @@ jobs:
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/1_kernel.sh
         
       - name: build rootfs
-        run: sudo bash -e config/2_rootfs.sh
+        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/2_rootfs.sh
         
       - name: provision img
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/3_provision.sh
