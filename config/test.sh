@@ -6,10 +6,10 @@ apt-get install -y debootstrap
 
 mkdir -p output/working rootfs
 # prep rootfs image
-truncate -s 1024M output/working/rootfs_base.ext4
-mkfs.ext4 output/working/rootfs_base.ext4
+truncate -s 1024M output/working/rootfs_base.btrfs
+mkfs.btrfs output/working/rootfs_base.btrfs
 sleep 5
-mount output/working/rootfs_base.ext4 rootfs
+mount -o compress=zstd output/working/rootfs_base.btrfs rootfs
 
 # debootstrap bullseye
 mount --bind /proc ./rootfs/proc 
@@ -25,7 +25,7 @@ debootstrap --arch=arm64 --include openssh-server,nano,wget,initramfs-tools,cron
 cp $(which qemu-aarch64-static) rootfs/usr/bin
 cat /proc/sys/fs/binfmt_misc/register
 
-$ mount | grep binfmt_misc
+mount | grep binfmt_misc
 mount
 #
  #chroot rootfs qemu-aarch64-static /bin/bash /debootstrap/debootstrap --second-stage
