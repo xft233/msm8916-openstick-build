@@ -20,7 +20,7 @@ mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 echo ":qemu-aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xb7\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-aarch64-static:F" > /proc/sys/fs/binfmt_misc/register
 cat /proc/sys/fs/binfmt_misc/register
 
-export DEBIAN_VERSION=bullseye
+export DEBIAN_VERSION=testing
 debootstrap --arch=arm64 --include openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION rootfs http://deb.debian.org/debian/
 cp $(which qemu-aarch64-static) rootfs/usr/bin
 cat /proc/sys/fs/binfmt_misc/register
