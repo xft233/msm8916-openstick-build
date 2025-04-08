@@ -24,7 +24,7 @@ echo ":qemu-aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x
 cp $(which qemu-aarch64-static) ./rootfs/usr/bin
 
 export DEBIAN_VERSION=testing
-debootstrap --foreign --arch=arm64 --include btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION rootfs http://deb.debian.org/debian/
+debootstrap --foreign --arch=arm64 --include btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION ./rootfs http://deb.debian.org/debian/
 
 rm ./rootfs/usr/bin/qemu-aarch64-static
 
