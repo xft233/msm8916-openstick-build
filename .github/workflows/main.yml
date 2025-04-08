@@ -28,7 +28,7 @@ jobs:
         run: docker build --tag linux .
       
       - name: build kernel
-        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/1_kernel.sh
+        run: docker run --rm --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/1_kernel.sh
         
       - name: build rootfs
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/2_rootfs.sh
