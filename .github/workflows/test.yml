@@ -25,7 +25,7 @@ jobs:
           detached: true
           
       - name: test debootstrap
-        run: sudo sh -e config/test.sh
+        run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/test.sh
         
 
         
