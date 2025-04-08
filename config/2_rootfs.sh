@@ -15,7 +15,8 @@ mkfs.btrfs ./output/working/rootfs_base.btrfs
 mount -o compress=zstd ./output/working/rootfs_base.btrfs ./rootfs
 
 # debootstrap bullseye
-mount --bind /proc ./rootfs/proc 
+mount
+mount --bind /proc ./rootfs/proc
 mount --bind /dev ./rootfs/dev # causes device busy
 mount --bind /dev/pts ./rootfs/dev/pts
 mount --bind /sys ./rootfs/sys
