@@ -1,6 +1,11 @@
 #! /bin/bash
 set -ex
 
+
+apt-get -y update
+apt-get install -y binfmt-support qemu-user-static
+apt-get install -y debootstrap
+
 #download extras
 pushd /output/working
 # git clone https://salsa.debian.org/Mobian-team/mobile-usb-networking --depth=1 && cd ./mobile-usb-networking && git checkout 056d9215bb38697b9dc59ba256fc6e904ee5923d && cd ..
