@@ -1,31 +1,31 @@
 #! /bin/bash
 set -ex
 
-cp ./output/working/rootfs_base.btrfs ./output/rootfs.btrfs
-mount ./output/rootfs.btrfs ./rootfs
+mv /output/working/rootfs_base.btrfs ./output/rootfs.btrfs
+mount /output/rootfs.btrfs ./rootfs
 
 
 ########################
 # provision prep
 
-mount --bind / ./rootfs/mnt
+mount --bind / /rootfs/mnt
 
-mount --bind /proc ./rootfs/proc 
-mount --bind /dev ./rootfs/dev # causes device busy
-mount --bind /dev/pts ./rootfs/dev/pts
-mount --bind /sys ./rootfs/sys
+mount --bind /proc /rootfs/proc 
+mount --bind /dev /rootfs/dev # causes device busy
+mount --bind /dev/pts /rootfs/dev/pts
+mount --bind /sys /rootfs/sys
 
-mkdir -p ./rootfs/config
-mkdir -p ./rootfs/output
-mount --bind ./config ./rootfs/config
-mount --bind ./output ./rootfs/output
+mkdir -p /rootfs/config
+mkdir -p /rootfs/output
+mount --bind /config /rootfs/config
+mount --bind /output /rootfs/output
 
-chroot ./rootfs /bin/bash /config/chroot-system-setup.sh
+chroot /rootfs /bin/bash /config/chroot-system-setup.sh
 
 sync
 sleep 5
-umount -f ./rootfs/* || true
-umount -f ./rootfs || true
+umount -f /rootfs/* || true
+umount -f /rootfs || true
 
 ########################
 # boot.img
