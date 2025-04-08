@@ -1,5 +1,5 @@
 #! /bin/bash
-set -ex
+# set -ex
 
 
 apt-get -y update
