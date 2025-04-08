@@ -24,10 +24,10 @@ jobs:
         with:
           detached: true
           
-     - name: Install dependencies
+      - name: Install dependencies
         run: docker build --tag linux .
         
-     - name: test debootstrap
+      - name: test debootstrap
         run: docker run --privileged -v $(pwd)/config:/config:ro -v $(pwd)/output:/output linux /bin/bash /config/test.sh
         
 
