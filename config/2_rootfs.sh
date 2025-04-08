@@ -18,11 +18,11 @@ popd
 truncate -s 1024M /output/working/rootfs_base.btrfs
 mkfs.btrfs /output/working/rootfs_base.btrfs
 
-mount -o compress=zstd /output/working/rootfs_base.btrfs /rootf
+mount -o compress=zstd /output/working/rootfs_base.btrfs /rootfs
 
 # debootstrap bullseye
 export DEBIAN_FRONTEND=noninteractive
-export DEBIAN_VERSION=testing
+export DEBIAN_VERSION=trixie
 debootstrap --foreign --arch=arm64 --include apt-utils,dialog,btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION /rootfs http://deb.debian.org/debian/
 mount --bind /proc /rootfs/proc
 mount --bind /dev /rootfs/dev # causes device busy
