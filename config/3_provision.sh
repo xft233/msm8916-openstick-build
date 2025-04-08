@@ -2,7 +2,7 @@
 set -ex
 
 mv /output/working/rootfs_base.btrfs ./output/rootfs.btrfs
-mount /output/rootfs.btrfs ./rootfs
+mount -o compress=zstd /output/rootfs.btrfs ./rootfs
 
 
 ########################
@@ -23,7 +23,8 @@ mount --bind /output /rootfs/output
 chroot /rootfs /bin/bash /config/chroot-system-setup.sh
 
 sync
-sleep 5
+
+umount /rootfs/dev/pts
 umount -f /rootfs/* || true
 umount -f /rootfs || true
 
