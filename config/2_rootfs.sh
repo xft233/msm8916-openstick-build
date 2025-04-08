@@ -15,7 +15,7 @@ wget http://ports.ubuntu.com/pool/multiverse/l/linux-firmware-snapdragon/linux-f
 popd
 
 # prep rootfs image
-truncate -s 1024M /output/working/rootfs_base.btrfs
+truncate -s 1424M /output/working/rootfs_base.btrfs
 mkfs.btrfs /output/working/rootfs_base.btrfs
 
 mount -o compress=zstd /output/working/rootfs_base.btrfs /rootfs
