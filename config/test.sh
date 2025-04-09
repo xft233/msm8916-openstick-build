@@ -21,12 +21,4 @@ echo ":qemu-aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x
 cat /proc/sys/fs/binfmt_misc/register
 
 export DEBIAN_VERSION=testing
-debootstrap --arch=arm64 --include openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION rootfs http://deb.debian.org/debian/
-cp $(which qemu-aarch64-static) rootfs/usr/bin
-cat /proc/sys/fs/binfmt_misc/register
-
-mount | grep binfmt_misc
-mount
-#
- #chroot rootfs qemu-aarch64-static /bin/bash /debootstrap/debootstrap --second-stage
-#rm rootfs/usr/bin/qemu-aarch64-static
+debootstrap --arch=arm64 --include apt-utils,dialog,btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION /rootfs http://deb.debian.org/debian/
