@@ -22,4 +22,10 @@ mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 debootstrap --arch=arm64 --include apt-utils,dialog,btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION /rootfs http://deb.debian.org/debian/
 
 umount /proc/sys/fs/binfmt_misc
+umount /rootfs/dev/pts
+umount /rootfs/output
+umount /rootfs/config
+rmdir /rootfs/output
+rmdir /rootfs/config
+umount -f /rootfs/*
 umount /rootfs
