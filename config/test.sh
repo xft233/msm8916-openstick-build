@@ -14,7 +14,7 @@ popd
 truncate -s 1024M output/working/rootfs_base.btrfs
 mkfs.btrfs output/working/rootfs_base.btrfs
 sleep 5
-mount -o compress=zstd output/working/rootfs_base.btrfs rootfs
+mount -o compress=zstd /output/working/rootfs_base.btrfs rootfs
 
 # debootstrap bullseye
 export DEBIAN_VERSION=testing
