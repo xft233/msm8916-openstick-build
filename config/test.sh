@@ -31,7 +31,5 @@ umount /proc/sys/fs/binfmt_misc
 umount /rootfs/dev/pts
 umount /rootfs/output
 umount /rootfs/config
-rmdir /rootfs/output
-rmdir /rootfs/config
 umount -f /rootfs/*
 umount /rootfs
