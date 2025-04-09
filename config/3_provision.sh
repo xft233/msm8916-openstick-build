@@ -22,12 +22,6 @@ mount --bind /output /rootfs/output
 
 chroot /rootfs /bin/bash /config/chroot-system-setup.sh
 
-sync
-
-umount /rootfs/dev/pts
-umount -f /rootfs/* || true
-umount -f /rootfs || true
-
 ########################
 # boot.img
 
@@ -48,7 +42,14 @@ mkbootimg \
 ########################
 
 sync
-sleep 5
+
+umount /rootfs/dev/pts
+umount /rootfs/output
+umount /rootfs/config
+rmdir /rootfs/output
+rmdir /rootfs/config
+umount -f /rootfs/* || true
+umount -f /rootfs || true
 
 ## below seems to fail but image still works?
 
