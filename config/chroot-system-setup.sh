@@ -47,3 +47,4 @@ apt -y install adbd
 # cp /output/working/mobile-usb-networking/debian/mobile-usb-networking.mobile-usb-network-setup.service /usr/lib/systemd/system/mobile-usb-network-setup.service
 # ln -s /usr/lib/systemd/system/mobile-usb-gadget.service /etc/systemd/system/multi-user.target.wants/mobile-usb-gadget.service
 # ln -s /usr/lib/systemd/system/mobile-usb-network-setup.servic
+df -h
