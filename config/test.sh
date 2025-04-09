@@ -18,6 +18,9 @@ mount -o compress=zstd /output/working/rootfs_base.btrfs rootfs
 
 # debootstrap bullseye
 export DEBIAN_VERSION=testing
+mount --bind /proc /rootfs/proc
+mount --bind /dev /rootfs/dev # causes device busy
+mount --bind /dev/pts /rootfs/dev/pts
 mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 debootstrap --arch=arm64 --include apt-utils,dialog,btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk $DEBIAN_VERSION /rootfs http://deb.debian.org/debian/
 
