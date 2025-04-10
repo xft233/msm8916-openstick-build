@@ -1,7 +1,7 @@
 echo "debian-$DEBIAN_VERSION" > /etc/hostname
 passwd -d root
 
-apt -y install mobile-tweaks-common network-manager locales sudo systemd-timesyncd curl vim
+apt-get -y install mobile-tweaks-common network-manager locales sudo systemd-timesyncd curl vim
 
 ########################
 # KERNEL
@@ -26,7 +26,7 @@ dpkg -i /output/working/linux-firmware-snapdragon_1.3-0ubuntu3_arm64.deb
 
 ########################
 # ADBD & USB networking
-apt -y install adbd
+apt-get -y install adbd
 
 # ADB daemon from https://github.com/hyx0329/openstick-failsafe-guard which was ripped from https://github.com/OpenStick/OpenStick/releases/download/v1/debian.zip, source not sure (alternative?: http://http.us.debian.org/debian/pool/main/a/android-tools/android-tools-adbd_5.1.1.r38-1.1_arm64.deb)
 # cp /output/working/openstick-failsafe-guard/bin/adbd-static /usr/bin/adbd && chmod +x /usr/bin/adbd
