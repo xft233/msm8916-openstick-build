@@ -16,7 +16,7 @@ make msm8916_defconfig
 make -j$(nproc)
 
 # package kernel => .deb
-fakeroot make deb-pkg
+fakeroot make bindeb-pkg
 
 # copy to working
 cp /linux/arch/arm64/boot/Image.gz /output/working
