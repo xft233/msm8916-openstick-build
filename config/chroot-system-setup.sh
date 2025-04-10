@@ -48,3 +48,4 @@ apt-get -y install adbd
 # ln -s /usr/lib/systemd/system/mobile-usb-gadget.service /etc/systemd/system/multi-user.target.wants/mobile-usb-gadget.service
 # ln -s /usr/lib/systemd/system/mobile-usb-network-setup.servic
 df -h
+apt-get clean
