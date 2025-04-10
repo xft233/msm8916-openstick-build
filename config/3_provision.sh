@@ -66,4 +66,4 @@ umount -f /rootfs || true
 img2simg /output/rootfs.btrfs /output/rootfs.img
 
 ##
-ls -la /output
+ls -lah /output
