@@ -1,6 +1,7 @@
 echo "debian-$DEBIAN_VERSION" > /etc/hostname
 passwd -d root
 
+apt-get update
 apt-get -y install mobile-tweaks-common network-manager locales sudo systemd-timesyncd curl vim
 
 ########################
@@ -11,12 +12,12 @@ dpkg -i /output/working/linux-image-*.deb
 ########################
 # CONSOLE
 
-mkdir -p /etc/systemd/system/serial-getty@ttyS0.service.d
-cat <<EOF > /etc/systemd/system/serial-getty@ttyS0.service.d/autologin.conf
-[Service]
-ExecStart=
-ExecStart=-/sbin/agetty --autologin root -o '-p -- \\u' --keep-baud 115200,38400,9600 %I $TERM
-EOF
+# mkdir -p /etc/systemd/system/serial-getty@ttyS0.service.d
+# cat <<EOF > /etc/systemd/system/serial-getty@ttyS0.service.d/autologin.conf
+# [Service]
+# ExecStart=
+# ExecStart=-/sbin/agetty --autologin root -o '-p -- \\u' --keep-baud 115200,38400,9600 %I $TERM
+# EOF
 
 ########################
 # FIRMWARE
