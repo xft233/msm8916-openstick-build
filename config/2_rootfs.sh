@@ -17,8 +17,8 @@ truncate -s 1024M output/working/rootfs_base.btrfs
 mkfs.btrfs output/working/rootfs_base.btrfs
 mount -o compress=zstd /output/working/rootfs_base.btrfs /rootfs
 
-# debootstrap bullseye
-export DEBIAN_VERSION=testing
+# debootstrap stable
+export DEBIAN_VERSION=stable
 mount --bind /proc /rootfs/proc
 mount --bind /dev /rootfs/dev # causes device busy
 mount --bind /dev/pts /rootfs/dev/pts
