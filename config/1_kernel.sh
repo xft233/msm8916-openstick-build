@@ -1,6 +1,5 @@
 #! /bin/bash
 set -ex
-
 rm -rf /output/*; mkdir -p /output/working
 
 # override kernel config
@@ -16,6 +15,8 @@ make msm8916_defconfig
 make -j$(nproc)
 
 # package kernel => .deb
+# need libdw-dev
+apt-get install -y libdw-dev
 fakeroot make bindeb-pkg
 
 # copy to working
