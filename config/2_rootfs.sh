@@ -19,6 +19,11 @@ mount -o compress=zstd /output/working/rootfs_base.btrfs /rootfs
 
 # debootstrap stable
 export DEBIAN_VERSION=stable
+
+mkdir -p /rootfs/proc
+mkdir -p /rootfs/dev
+mkdir -p /rootfs/dev/pts
+
 mount --bind /proc /rootfs/proc
 mount --bind /dev /rootfs/dev # causes device busy
 mount --bind /dev/pts /rootfs/dev/pts
