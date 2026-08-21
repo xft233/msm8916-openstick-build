@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -ex
+set +e
 apt-get -y update
 apt-get install -y binfmt-support qemu-user-static
 apt-get install -y debootstrap eatmydata
