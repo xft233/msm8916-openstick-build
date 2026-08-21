@@ -1,6 +1,6 @@
 #! /bin/bash
 set -ex
-
+set +e
 mv /output/working/rootfs_base.btrfs ./output/rootfs.btrfs
 mount -o compress=zstd /output/rootfs.btrfs ./rootfs
 
