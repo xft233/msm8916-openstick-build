@@ -18,7 +18,7 @@ mkfs.btrfs output/working/rootfs_base.btrfs
 mount -o compress=zstd /output/working/rootfs_base.btrfs /rootfs
 
 # debootstrap stable
-export DEBIAN_VERSION=stable
+export DEBIAN_VERSION=testing
 
 mkdir -p /rootfs/proc
 mkdir -p /rootfs/dev
