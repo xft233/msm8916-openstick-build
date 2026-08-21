@@ -18,16 +18,7 @@ mkfs.btrfs output/working/rootfs_base.btrfs
 mount -o compress=zstd /output/working/rootfs_base.btrfs /rootfs
 
 # debootstrap stable
-export DEBIAN_VERSION=testing
-
-mkdir -p /rootfs/proc
-mkdir -p /rootfs/dev
-mkdir -p /rootfs/dev/pts
-
-mount --bind /proc /rootfs/proc
-mount --bind /dev /rootfs/dev # causes device busy
-mount --bind /dev/pts /rootfs/dev/pts
-mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
+export DEBIAN_VERSION=stable
 
 debootstrap \
     --foreign \
@@ -37,6 +28,10 @@ debootstrap \
     /rootfs \
     http://deb.debian.org/debian/
 
+mount --bind /proc /rootfs/proc
+mount --bind /dev /rootfs/dev # causes device busy
+mount --bind /dev/pts /rootfs/dev/pts
+mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 
 cp $(which qemu-aarch64-static) /rootfs/usr/bin
 echo ":qemu-aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xb7\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-aarch64-static:F" > /proc/sys/fs/binfmt_misc/register
