@@ -42,10 +42,10 @@ dpkg-deb -x /rootfs/var/cache/apt/archives/eatmydata_*.deb /rootfs
 dpkg-deb -x /rootfs/var/cache/apt/archives/libeatmydata1_*.deb /rootfs
 chroot rootfs \
     /usr/bin/eatmydata \
-    /debootstrap/debootstrap --second-stage --verbose
+    /debootstrap/debootstrap --second-stage
 
 umount /proc/sys/fs/binfmt_misc
-umount /rootfs/dev/pts
+umount /rootfs/dev/pts || true
 umount /rootfs/dev
 umount /rootfs/proc
 umount /rootfs
