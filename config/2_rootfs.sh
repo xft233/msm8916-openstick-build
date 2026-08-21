@@ -3,7 +3,7 @@
 set -ex
 apt-get -y update
 apt-get install -y binfmt-support qemu-user-static
-apt-get install -y debootstrap
+apt-get install -y debootstrap eatmydata
 mkdir -p output/working rootfs
 
 # prep rootfs image
@@ -20,10 +20,11 @@ mount -o compress=zstd /output/working/rootfs_base.btrfs /rootfs
 # debootstrap stable
 export DEBIAN_VERSION=stable
 
-debootstrap \
+# 用 eatmydata 减少不必要的 sync，加快速度
+eatmydata debootstrap \
     --foreign \
     --arch=arm64 \
-    --include=debhelper,apt-utils,dialog,btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk \
+    --include=debhelper,apt-utils,dialog,btrfs-progs,openssh-server,nano,wget,initramfs-tools,cron,wpasupplicant,init,dbus,dnsmasq,ca-certificates,gawk,eatmydata \
     "$DEBIAN_VERSION" \
     /rootfs \
     http://deb.debian.org/debian/
@@ -36,7 +37,13 @@ mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 cp $(which qemu-aarch64-static) /rootfs/usr/bin
 echo ":qemu-aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xb7\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-aarch64-static:F" > /proc/sys/fs/binfmt_misc/register
 
-chroot /rootfs /debootstrap/debootstrap --second-stage --verbose
+# 解压 eatmydata:arm64
+dpkg-deb -x \
+    rootfs/var/cache/apt/archives/eatmydata_*_arm64.deb \
+    rootfs
+chroot rootfs \
+    /usr/bin/eatmydata \
+    /debootstrap/debootstrap --second-stage --verbose
 
 umount /proc/sys/fs/binfmt_misc
 umount /rootfs/dev/pts
