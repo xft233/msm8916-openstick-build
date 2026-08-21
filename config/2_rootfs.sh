@@ -14,7 +14,7 @@ pushd /output/working
 wget http://ports.ubuntu.com/pool/multiverse/l/linux-firmware-snapdragon/linux-firmware-snapdragon_1.3-0ubuntu3_arm64.deb
 popd
 
-truncate -s 1024M output/working/rootfs_base.btrfs
+truncate -s 2048M output/working/rootfs_base.btrfs
 mkfs.btrfs output/working/rootfs_base.btrfs
 mount -o compress=zstd /output/working/rootfs_base.btrfs /rootfs
 
