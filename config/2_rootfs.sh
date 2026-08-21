@@ -40,7 +40,6 @@ chroot /rootfs /debootstrap/debootstrap --second-stage --verbose
 
 umount /proc/sys/fs/binfmt_misc
 umount /rootfs/dev/pts
-umount /rootfs/output
-umount /rootfs/config
-umount -f /rootfs/*
+umount /rootfs/dev
+umount /rootfs/proc
 umount /rootfs
