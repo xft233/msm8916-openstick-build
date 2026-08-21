@@ -37,10 +37,9 @@ mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 cp $(which qemu-aarch64-static) /rootfs/usr/bin
 echo ":qemu-aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xb7\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-aarch64-static:F" > /proc/sys/fs/binfmt_misc/register
 
-# 解压 eatmydata:arm64
-dpkg-deb -x \
-    rootfs/var/cache/apt/archives/eatmydata_*_arm64.deb \
-    rootfs
+# 解压 eatmydata
+dpkg-deb -x /rootfs/var/cache/apt/archives/eatmydata_*.deb /rootfs
+dpkg-deb -x /rootfs/var/cache/apt/archives/libeatmydata1_*.deb /rootfs
 chroot rootfs \
     /usr/bin/eatmydata \
     /debootstrap/debootstrap --second-stage --verbose
